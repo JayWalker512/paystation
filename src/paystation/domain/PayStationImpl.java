@@ -1,4 +1,5 @@
 package paystation.domain;
+import java.util.*;
 
 /**
  * Implementation of the pay station.
@@ -23,7 +24,13 @@ public class PayStationImpl implements PayStation {
     
     private int insertedSoFar;
     private int timeBought;
-
+    private int total;
+    private int nickelCounter = 0;
+    private int dimeCounter = 0;
+    private int qrtrCounter = 0;
+    
+    HashMap<Integer, Integer> map = new HashMap<>();
+    
     @Override
     public void addPayment(int coinValue)
             throws IllegalCoinException {
@@ -34,7 +41,21 @@ public class PayStationImpl implements PayStation {
             default:
                 throw new IllegalCoinException("Invalid coin: " + coinValue);
         }
-        insertedSoFar += coinValue;
+        
+        if(coinValue == 5) {
+            nickelCounter++;
+            map.put(5, nickelCounter);
+        }
+        else if(coinValue == 10) {
+            dimeCounter++;
+            map.put(10, dimeCounter);
+        }
+        else if(coinValue == 25) {
+            qrtrCounter++;
+            map.put(25, qrtrCounter);
+        }
+        
+        insertedSoFar += coinValue;        
         timeBought = insertedSoFar / 5 * 2;
     }
 
@@ -46,16 +67,31 @@ public class PayStationImpl implements PayStation {
     @Override
     public Receipt buy() {
         Receipt r = new ReceiptImpl(timeBought);
+        total = insertedSoFar;
         reset();
+        map.put(5, 0);
+        map.put(10, 0);
+        map.put(25, 0);
         return r;
     }
 
     @Override
-    public void cancel() {
+    public HashMap<Integer, Integer> cancel() {
+        HashMap<Integer, Integer> temp = map;
         reset();
+        return temp;
     }
     
     private void reset() {
+        nickelCounter = 0;
+        dimeCounter = 0;
+        qrtrCounter = 0;
         timeBought = insertedSoFar = 0;
+    }
+    
+    public int empty() {
+        int temp = total;
+        total = 0;
+        return temp;
     }
 }

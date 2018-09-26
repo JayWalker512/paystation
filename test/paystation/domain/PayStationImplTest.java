@@ -11,6 +11,7 @@
  */
 package paystation.domain;
 
+import java.util.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -137,5 +138,62 @@ public class PayStationImplTest {
         ps.addPayment(25);
         assertEquals("Insert after cancel should work",
                 10, ps.readDisplay());
+    }
+    // test for empty
+    @Test
+    public void emptyReturnsNum()
+                throws IllegalCoinException {
+        ps.addPayment(10);
+        ps.buy();
+        assertEquals("empty should set total to 10",10,ps.empty());
+    }
+    @Test
+    public void emptysetstozero()
+                throws IllegalCoinException {
+        ps.addPayment(10);
+        ps.empty();
+        assertEquals("empty should set total to 0",0,ps.empty());
+        ps.addPayment(5);
+        ps.cancel();
+        assertEquals("empty after cencel should set total to 0",0,ps.empty());
+    }
+    @Test
+    public void cencelReturnsMap()
+                throws IllegalCoinException {
+        HashMap<Integer, Integer> map;
+        int test;
+        ps.addPayment(10);
+        map = ps.cancel();
+        test = map.get(10);
+        assertEquals("map is not empty",1,test);
+    }
+    @Test
+    public void cencelReturnsMix()
+                throws IllegalCoinException {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(5,1);
+        map.put(10,1);
+        map.put(25,1);
+        ps.addPayment(5);
+        ps.addPayment(10);
+        ps.addPayment(25);
+        assertEquals("cencel return mixture",true,map.equals(ps.cancel()));
+    }
+    @Test
+    public void cencelclearsmap()
+                throws IllegalCoinException {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        assertEquals("cencel clears map",true,map.equals(ps.cancel()));
+    }
+    @Test
+    public void buyclearsmap()
+                throws IllegalCoinException {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(5,0);
+        map.put(10,0);
+        map.put(25,0);
+        ps.addPayment(10);
+        ps.buy();
+        assertEquals("buy clears map",true,ps.cancel().equals(map));
     }
 }
