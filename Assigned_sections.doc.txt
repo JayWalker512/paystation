@@ -1,0 +1,18 @@
+James: 
+* Displaying Menu
+* Allowing user to choose an option
+* When an option is selected, something happens (call a method)
+* Handle errors
+* Writing portion #1
+Erik: 
+* ProgressiveRate Strategy
+* Writing portion #3
+Brandon: 
+* UML
+* LinearRate Strategy
+Binh: 
+* AlternatingRate Strategy
+* Rate Strategy Interface
+* Writing portion #2
+TODO
+
