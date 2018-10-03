@@ -1,5 +1,7 @@
 package paystation.domain;
 
+import java.util.Calendar;
+
 /**
  * Implementation of the Alternating Rate Strategy.
  *
@@ -13,5 +15,22 @@ public class AlternatingRateStrategy implements RateStrategy {
     @Override
     public int calculateTime(int payment) {
         return 0;
+    }
+
+    /**
+     * Determine if the current day is during the weekends.
+     *
+     * @return whether today is during the weekends
+     */
+    private boolean isWeekend() {
+        Calendar today = Calendar.getInstance();
+        int dayOfWeek = today.get(Calendar.DAY_OF_WEEK);
+        switch (dayOfWeek) {
+            case Calendar.SATURDAY:
+            case Calendar.SUNDAY:
+                return true;
+            default:
+                return false;
+        }
     }
 }
