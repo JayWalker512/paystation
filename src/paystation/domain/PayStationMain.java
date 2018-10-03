@@ -21,7 +21,7 @@ public class PayStationMain {
         System.out.println("Welcome to the PayStation");
         System.out.println("Please select and option:");
         System.out.println("1.Deposit Coins\n2.Display\n3.Buy Ticket\n4.Cancel\4nChange Rate Strategy");
-        
+        //vghfjfj
     }
     
 }
