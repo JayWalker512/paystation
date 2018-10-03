@@ -14,7 +14,9 @@ public class AlternatingRateStrategy implements RateStrategy {
 
     @Override
     public int calculateTime(int payment) {
-        return 0;
+        if (isWeekend())
+            return ProgressiveRateStrategy.calculateTime(payment);
+        return LinearRateStrategy.calculateTime(payment);
     }
 
     /**
