@@ -28,6 +28,12 @@ public class PayStationImpl implements PayStation {
     private int nickelCounter = 0;
     private int dimeCounter = 0;
     private int qrtrCounter = 0;
+    private RateStrategy rs;
+    
+    enum RateStrategies 
+    {
+        Progressive, Linear, Alternating;
+    }
     
     HashMap<Integer, Integer> map = new HashMap<>();
     
@@ -42,8 +48,8 @@ public class PayStationImpl implements PayStation {
                 throw new IllegalCoinException("Invalid coin: " + coinValue);
         }
         
-        if(coinValue == 5) {
-            nickelCounter++;
+        if(coinValue == 5){
+            nickelCounter++; 
             map.put(5, nickelCounter);
         }
         else if(coinValue == 10) {
@@ -56,7 +62,7 @@ public class PayStationImpl implements PayStation {
         }
         
         insertedSoFar += coinValue;        
-        timeBought = insertedSoFar / 5 * 2;
+        timeBought = rs.calculateTime(insertedSoFar);
     }
 
     @Override
@@ -93,5 +99,23 @@ public class PayStationImpl implements PayStation {
         int temp = total;
         total = 0;
         return temp;
+    }
+    
+    public void setRateStrategy(RateStrategies rateStrategy) {
+        
+        switch(rateStrategy) {
+            
+            case Progressive:
+                rs = new ProgressiveRateStrategy();
+                break;
+                
+            case Linear:
+                rs = new LinearRateStrategy();
+                break;
+                
+            case Alternating:
+                rs = new AlternatingRateStrategy();
+                break;  
+        }
     }
 }

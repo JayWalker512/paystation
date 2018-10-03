@@ -9,11 +9,12 @@ package paystation.domain;
  *
  * @author reric
  */
-public class ProgressiveRateStrategy {
+public class ProgressiveRateStrategy implements RateStrategy {
     
     private int timeBoughtMinutes = 0; //60 is an hour
     
-    int calculateTime(int payment) {
+    @Override
+    public int calculateTime(int payment) {
         
         if (timeBoughtMinutes <= 60 || payment <= 150) {
             timeBoughtMinutes = (payment*2)/5;
