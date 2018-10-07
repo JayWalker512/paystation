@@ -35,19 +35,20 @@ public class PayStationMain {
         }
         switch (answer) {
             case 1:
-                System.out.println("");
+                System.out.println("Deposit Coins");
                 break;
             case 2:
-                System.out.println("");
+                System.out.println("Display");
                 break;
             case 3:
-                System.out.println("");
+                System.out.println("Buy Ticket");
                 break;
             case 4:
-                System.out.println("");
+                System.out.println("Cancel");
                 break;
             case 5:
-                System.out.println("");
+                System.out.println("Change Rate Strategy");
+                submenu();
                 break;
             default:
                 System.out.println("GoodBye");
@@ -56,4 +57,37 @@ public class PayStationMain {
         
     }
     
+public static void submenu(){
+    System.out.println("You have selected");
+    System.out.println("Please select one of the Three rates\n1. Linear rate\n 2. Progressive rate\n 3. Alternation Rate");
+    int answer=0;
+        
+        BufferedReader br = 
+                 new BufferedReader(new InputStreamReader(System.in)); 
+    try {
+            answer = Integer.parseInt(br.readLine());
+            //vghfjfjtest
+        } catch (IOException | NumberFormatException ex) {
+            System.out.println("Pleasw enter a number");
+            //Logger.getLogger(PayStationMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    switch(answer)
+    {      case 1:
+                System.out.println("Linear rate");
+                break;
+            case 2:
+                System.out.println("Progressive rate");
+                break;
+            case 3:
+                System.out.println("Alternation Rate");
+                break;
+            default:
+                System.out.println("GoodBye");
+                break;
+    }
+
+
+}
+
+
 }
