@@ -30,7 +30,7 @@ public class PayStationImpl implements PayStation {
     private int qrtrCounter = 0;
     private RateStrategy rs;
     
-    enum RateStrategies 
+    public enum RateStrategies 
     {
         Progressive, Linear, Alternating;
     }
