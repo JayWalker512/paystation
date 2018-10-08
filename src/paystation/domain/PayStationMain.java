@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class PayStationMain {
 
-    static PayStation ps;
+     static PayStationImpl ps;
 
     public static void main(String[] args) throws IllegalCoinException {
         ps = new PayStationImpl();
@@ -87,14 +87,16 @@ public class PayStationMain {
             switch (answer) {
                 case 1:
                     System.out.println("Linear rate");
-                   // ps.setRateStrategy(PayStationImpl.RateStrategies.Linear);
+                    ps.setRateStrategy(PayStationImpl.RateStrategies.Linear);
 
                     break;
                 case 2:
                     System.out.println("Progressive rate");
+                    ps.setRateStrategy(PayStationImpl.RateStrategies.Progressive);
                     break;
                 case 3:
                     System.out.println("Alternation Rate");
+                    ps.setRateStrategy(PayStationImpl.RateStrategies.Alternating);
                     break;
                 default:
                     System.out.println("Try again");
