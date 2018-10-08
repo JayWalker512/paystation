@@ -17,12 +17,12 @@ import java.util.logging.Logger;
  */
 public class PayStationMain {
 
-     static PayStationImpl ps;
+    static PayStationImpl ps;
 
     public static void main(String[] args) throws IllegalCoinException {
         ps = new PayStationImpl();
         int answer = 0;
-
+        int coins = 0;
         BufferedReader br
                 = new BufferedReader(new InputStreamReader(System.in));
 
@@ -41,7 +41,24 @@ public class PayStationMain {
                 case 1:
 
                     System.out.println("Deposit Coins");
-                    ps.addPayment(24);
+                    System.out.println("Please enter a increments of Five");
+                     {
+                        try {
+                            coins = Integer.parseInt(br.readLine());
+                        } catch (IOException | NumberFormatException ex) {
+                            //Logger.getLogger(PayStationMain.class.getName()).log(Level.SEVERE, null, ex);
+                            System.out.println("please enter a number");
+                        }
+                    }
+
+                    boolean goodpayment = incrementsOfFive(coins);
+                    if (goodpayment == true) {
+                        ps.addPayment(coins);
+                       
+                    } else {
+                        System.out.println("Please enter a increments of Five");
+                    }
+
                     break;
                 case 2:
                     System.out.println("Display");
@@ -72,7 +89,7 @@ public class PayStationMain {
         System.out.println("Please select one of the Three rates\n1. Linear rate\n2. Progressive rate\n3. Alternation Rate");
         int answer = 0;
         while (answer != 1 && answer != 2 && answer != 3) {
-            System.out.println("loop");
+
             BufferedReader br
                     = new BufferedReader(new InputStreamReader(System.in));
 
@@ -106,4 +123,7 @@ public class PayStationMain {
 
     }
 
+    public static boolean incrementsOfFive(int coin) {
+        return coin % 5 == 0;
+    }// end incrementsOfFive
 }
