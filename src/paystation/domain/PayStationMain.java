@@ -47,7 +47,7 @@ public class PayStationMain {
                 case 1:
 
                     System.out.println("Deposit Coins");
-                    System.out.println("Please enter a increments of Five");
+                    System.out.println("Please enter a 5, 10 or 25");
                      
                         try {
                             coins = Integer.parseInt(br.readLine());
@@ -60,32 +60,32 @@ public class PayStationMain {
                     boolean goodpayment = incrementsOfFive(coins);
                     if (goodpayment == true) {
                         ps.addPayment(coins);
-                     //readDisplay = ps.readDisplay();
-                        
+                           
                        
                     } else {
-                        System.out.println("Please enter a increments of Five");
+                        System.out.println("Please enter a 5, 10 or 25");
                     }//end if else
 
                     break;
                 case 2:
-                     //System.out.println("Display");
+                     
                      readDisplay=ps.readDisplay();
-                     System.out.println("readDisplay"+ readDisplay);
+                     System.out.println("Time so far \n"+ readDisplay+" minutes");
                     break;
                 case 3:
-                    //System.out.println("Buy Ticket");
-                     receipt=ps.buy();
-                    System.out.println("Receipt " + receipt.value());
+                    System.out.println("Buy Ticket");
+                    receipt=ps.buy();
+                    System.out.println("Receipt " + receipt.value()+" minutes");
                     break;
                 case 4:
                     System.out.println("Cancel");
                     Map<Integer,Integer> returnmoney = ps.cancel();
-                       for ( int key :returnmoney.keySet())
+                        System.out.println("Changes"+"\t\t"+"Amount");
+                    for ( int key :returnmoney.keySet())
                        {
-                           System.out.println(key + "\t\t"+returnmoney.get(key));
+                           System.out.println(key+"¢" +"\t\t"+returnmoney.get(key));
                        }
-                    
+                       System.out.println("Goodbye");
                     break;
                 case 5:
                     System.out.println("Change Rate Strategy");
@@ -112,7 +112,7 @@ public class PayStationMain {
                 answer = Integer.parseInt(br.readLine());
                 //vghfjfjtest
             } catch (IOException | NumberFormatException ex) {
-                System.out.println("Pleasw enter a number");
+                System.out.println("Please enter a number");
 
                 //Logger.getLogger(PayStationMain.class.getName()).log(Level.SEVERE, null, ex);
             }//end try catch
@@ -139,6 +139,13 @@ public class PayStationMain {
     }//end submenu
 
     public static boolean incrementsOfFive(int coin) {
-        return coin % 5 == 0;
+        if(coin ==5){
+            return true;
+        }
+        if(coin ==10){
+            return true;
+        }
+        //coin % 5 == 0;
+        return coin ==25 ;
     }// end incrementsOfFive
 }// end PayStationMenuClass
