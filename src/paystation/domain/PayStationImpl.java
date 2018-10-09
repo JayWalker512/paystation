@@ -37,6 +37,11 @@ public class PayStationImpl implements PayStation {
     
     HashMap<Integer, Integer> map = new HashMap<>();
     
+    public PayStationImpl()
+    {
+        rs = new LinearRateStrategy();
+    }
+    
     @Override
     public void addPayment(int coinValue)
             throws IllegalCoinException {
