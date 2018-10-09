@@ -16,13 +16,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 
-public class LinearRateStrategyTest {
+public class ProgressiveRateStrategyTest {
 
-    LinearRateStrategy rs;
+    ProgressiveRateStrategy rs;
 
     @Before
     public void setup() {
-        rs = new LinearRateStrategy();
+        rs = new ProgressiveRateStrategy();
     }
 
     /**
@@ -33,5 +33,12 @@ public class LinearRateStrategyTest {
         assertEquals("0 minutes for 0 payment", 0, rs.calculateTime(0));
         assertEquals("10 cents gives 4 mins", 4, rs.calculateTime(10));
         assertEquals("100 cents gives 40 minutes", 40, rs.calculateTime(100));
+        
+        //now if we buy over an hour, we can see if it's being "progressive" for the 2nd hour
+        assertEquals("150 cents gives 60 minutes", 60, rs.calculateTime(150));
+        assertEquals("200 cents gives 75 minutes", 75, rs.calculateTime(200));
+        
+        //test if 3rd hour follows provided formula
+        assertEquals("400 cents gives 130 minutes", 130, rs.calculateTime(400));
     }
 }
