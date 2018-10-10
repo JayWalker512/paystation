@@ -23,7 +23,6 @@ import java.util.*;
 public class PayStationImpl implements PayStation {
     
     private int insertedSoFar;
-    private int timeBought;
     private int total;
     private int nickelCounter = 0;
     private int dimeCounter = 0;
@@ -67,17 +66,16 @@ public class PayStationImpl implements PayStation {
         }
         
         insertedSoFar += coinValue;        
-        timeBought = rs.calculateTime(insertedSoFar);
     }
 
     @Override
     public int readDisplay() {
-        return timeBought;
+        return rs.calculateTime(insertedSoFar);
     }
 
     @Override
     public Receipt buy() {
-        Receipt r = new ReceiptImpl(timeBought);
+        Receipt r = new ReceiptImpl(readDisplay());
         total += insertedSoFar;
         reset();
         map.put(5, 0);
@@ -97,7 +95,7 @@ public class PayStationImpl implements PayStation {
         nickelCounter = 0;
         dimeCounter = 0;
         qrtrCounter = 0;
-        timeBought = insertedSoFar = 0;
+        insertedSoFar = 0;
     }
     
     public int empty() {
