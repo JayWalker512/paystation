@@ -39,8 +39,8 @@ public class PayStationMain {
                 answer = Integer.parseInt(br.readLine());
             
             } catch (IOException | NumberFormatException ex) {
-                System.out.println("Pleasw enter a number");
-                
+                System.out.println("Please enter a number");
+                answer =0;
                 //Logger.getLogger(PayStationMain.class.getName()).log(Level.SEVERE, null, ex);
             }//end try catch
             switch (answer) {
@@ -54,7 +54,9 @@ public class PayStationMain {
                         } catch (IOException | NumberFormatException ex) {
                             //Logger.getLogger(PayStationMain.class.getName()).log(Level.SEVERE, null, ex);
                             System.out.println("please enter a number");
+                            
                         }// end try catch
+                        
                     
 
                     boolean goodpayment = incrementsOfFive(coins);
