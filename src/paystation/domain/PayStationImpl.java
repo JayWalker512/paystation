@@ -78,7 +78,7 @@ public class PayStationImpl implements PayStation {
     @Override
     public Receipt buy() {
         Receipt r = new ReceiptImpl(timeBought);
-        total = insertedSoFar;
+        total += insertedSoFar;
         reset();
         map.put(5, 0);
         map.put(10, 0);
